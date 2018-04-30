@@ -1,1 +1,1 @@
-# Bookmarker-JS
+# Bookmarker JavaScript
