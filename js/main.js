@@ -69,7 +69,7 @@ function fetchBookmarks(){
   var bookmarks = JSON.parse(localStorage.getItem("bookmarks"));
 
   //Get output id
-  var bookmarksResults = document.getElementById("bookmarkResults");
+  var bookmarksResults = document.getElementById("bookmarksResults");
 
   //Build output
   bookmarksResults.innerHTML = " ";
