@@ -16,14 +16,9 @@ function saveBookmark(e){
     url: siteUrl
   }
 
-  /*Local storage test
-  localStorage.setItem("test", "Hello World" );
-  localStorage.getItem("test");
-  localStorage.removeItem("test")*/
-
-  // Test if bookmark is null
+  // Test if bookmarks is null
   if(localStorage.getItem("bookmarks") === null){
-    // Initial array
+    // Initialise array
     var bookmarks = [];
     // Add to array
     bookmarks.push(bookmark);
@@ -39,7 +34,6 @@ function saveBookmark(e){
   }
 
   //Clear Form
-
   document.getElementById("myForm").reset();
 
   // Re-fetch bookmarksResults
@@ -47,6 +41,9 @@ function saveBookmark(e){
 
   // Prevent form from submitting
   e.preventDefault();
+}
+
+
 
 // Delete bookmark
 function deleteBookmark(url){
@@ -58,10 +55,14 @@ function deleteBookmark(url){
       bookmarks.splice(i, 1);
     }
   }
+  //Reset back to localStorage
+  localStorage.setItem("bookmarks", JSON.stringify(bookmarks));
+
+  // Re-fetch bookmarksResults
+  fetchBookmarks();
 }
 
-//Reset back to localStorage
-localStorage.setItem("bookmarks", JSON.stringify(bookmarks));
+
 
 // Fetch bookmarks
 function fetchBookmarks(){
@@ -78,10 +79,10 @@ function fetchBookmarks(){
     var url = bookmarks[i].url;
 
     bookmarksResults.innerHTML += '<div class="well">'+
-                                '<h3>' +name+
+                                '<h3>'+name+
                                 ' <a class="btn btn-default" target="_blank" href="'+url+'">Visit</a> ' +
                                 ' <a onclick="deleteBookmark(\''+url+'\')" class="btn btn-danger" href="#">Delete</a> ' +
-                                '</h3>' +
+                                '</h3>'+
                                 '</div>';
   }
 }
@@ -96,8 +97,10 @@ function validateForm(siteName, siteUrl){
   var expression = /[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi;
   var regex = new RegExp(expression);
 
-  if(siteUrl.match(regex)){
+  if(!siteUrl.match(regex)){
     alert("Please use a valid URL");
     return false;
+    }
+
+    return true;
   }
-}
